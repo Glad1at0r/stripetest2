@@ -46,8 +46,11 @@ class Data extends React.Component {
           <div key={i}>
             <Card style={articleCardStyle}>
               <CardTitle titleStyle='bold' title={article.title}/>
-              <CardText
-                color='#BF000000'>
+              <CardText>                
+                {article.author_id}
+              </CardText>
+			  <CardText
+                color='#424242'>
                 {article.content}
               </CardText>
             </Card>
