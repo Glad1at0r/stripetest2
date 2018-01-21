@@ -12,7 +12,7 @@ class Data extends React.Component {
     //articles -> has a list of all articles
     //currentArticle -> the current article being shown in detail
     this.state = {
-      products: [],
+      articles: [],
       isLoading: false
     };
   }
@@ -23,11 +23,11 @@ class Data extends React.Component {
       ...this.state,
       isLoading: true
     })
-    getArticleList().then(productList => {
+    getArticleList().then(articleList => {
       //Update the state with the fetched articles
       this.setState((prevState) => ({
         isLoading: false,
-        products: productList
+        articles: articleList
       }));
     });
   }
@@ -40,18 +40,18 @@ class Data extends React.Component {
             This component utilizes the hasura data APIs. In this example, it fetches a list of articles from the articles table which has been pre created and already loaded with some dummy data. To check out how the data API is used to render this view, check out services/ui/app/src/hasuraExamples/Data.js. A good exercise would be to also show the author details for each of these articles. 
           </CardText>
         </Card>
-        <h1>Products</h1>
+        <h1>Articles</h1>
         <Divider/>
-        {this.state.products.map((product, i) =>
+        {this.state.articles.map((article, i) =>
           <div key={i}>
             <Card style={articleCardStyle}>
-              <CardTitle titleStyle='bold' title={product.name}/>
+              <CardTitle titleStyle='bold' title={article.title}/>
               <CardText>                
-                {product.caption}
+                {article.author_id}
               </CardText>
 			  <CardText
                 color='#424242'>
-                {product.description}
+                {article.content}
               </CardText>
             </Card>
           </div>

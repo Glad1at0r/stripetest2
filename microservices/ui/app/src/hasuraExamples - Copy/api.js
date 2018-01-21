@@ -12,12 +12,12 @@ const getArticleList = () => {
   var body = {
       "type": "select",
       "args": {
-          "table": "product",
+          "table": "article",
           "columns": [
+              "content",
               "id",
-              "name",
-              "price",
-              "description"
+              "author_id",
+              "title"
           ]
       }
   };
