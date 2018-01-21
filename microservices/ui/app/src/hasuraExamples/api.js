@@ -12,9 +12,9 @@ const getArticleList = () => {
   var body = {
       "type": "select",
       "args": {
-          "table": "product",
+          "table": "Product",
           "columns": [
-              "id",
+              "id", 
               "name",
               "price",
               "description"

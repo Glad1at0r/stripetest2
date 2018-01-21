@@ -47,7 +47,7 @@ class Data extends React.Component {
             <Card style={articleCardStyle}>
               <CardTitle titleStyle='bold' title={product.name}/>
               <CardText>                
-                {product.caption}
+                {product.price}
               </CardText>
 			  <CardText
                 color='#424242'>
