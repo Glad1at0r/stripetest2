@@ -17,8 +17,7 @@ const getArticleList = () => {
               "id", 
               "name",
               "price",
-              "description",
-			  "imagename"
+              "description"
           ]
       }
   };

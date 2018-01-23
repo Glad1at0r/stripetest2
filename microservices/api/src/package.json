@@ -8,10 +8,14 @@
   "author": "Jaison",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "dateformat": "^3.0.2",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
+    "node-fetch": "^1.7.3",
     "request": "^2.83.0",
-    "request-debug": "^0.2.0"
+    "request-debug": "^0.2.0",
+    "stripe": "^5.4.0"
   }
 }
