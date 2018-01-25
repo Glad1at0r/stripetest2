@@ -151,7 +151,7 @@ export class GridListExampleSimple extends React.Component
 					  subtitle={<span> <b>{product.price}</b></span>}
 					  actionIcon={<StripeCheckout
 									token={this.onToken}
-									stripeKey="pk_test_XNB5Gkou7mwEa8K9c9c2XFYL"
+									stripeKey=stripePubKey
 								  />    
 								 }
 					>

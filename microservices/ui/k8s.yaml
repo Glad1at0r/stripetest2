@@ -22,6 +22,12 @@ items:
         - image: hasura/hello-world:latest
           imagePullPolicy: IfNotPresent
           name: ui
+          env:
+          - name: stripePubKey
+            valueFrom:
+              secretKeyRef:
+                name: hasura-secrets
+                key: stripe.pubkey
           ports:
           - containerPort: 8080
             protocol: TCP
