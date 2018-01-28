@@ -31,7 +31,7 @@ How to Execute:
 5.	After cloning successfully, 
 	a. Go to folder hello-react\microservices\api\src and do npm install and then npm start.
 	b. Go to folder hello-react\microservices\ui\app and do npm install and then npm start
-6. Now backend server runs in http://localhost:8080 and frontend runs in http://localhost:3000
+6. Now backend server runs in http://localhost:8080 and frontend runs in http://localhost:3000/home
 7.  You are ready now to chose product and place order.
 8.  Backend Server does log some messages.
 
