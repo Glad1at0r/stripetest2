@@ -25,15 +25,17 @@ router.route("/").get(function (req, res) {
 
 //changes for stripe charge task
 router.use(bodyParser.text({ type: 'urlencoded' }))
-router.route("/charge").post(function (req, res) 
+router.route("/charge").post(function (req, res)
 {
-	
+
 	methodTime('/charge');
 	console.log('ORIGINAL BODY : ',req.body);
 	var obj = JSON.parse(req.body);
 	console.log('OBJ.id : ',obj.id);
 	console.log('OBJ.email: ',obj.email);
-
+	console.log('OBJ.amount: ',obj.amount);
+  console.log('OBJ.currency: ',obj.currency);
+  console.log('OBJ.description: ',obj.description);
 //override this amount with the amount being passed from checkout
     let amount = 1500;
 //create customer
@@ -44,14 +46,28 @@ router.route("/charge").post(function (req, res)
 	{ console.log('customer creatred with id: ', customer.id);
 //charge the card
 	  stripe.charges.create({
-							  amount,
-							  description: "Sample Charge",
-							  currency: "gbp",
+							  amount: obj.amount,
+							  description: obj.description,
+							  currency: obj.currency,
 							  customer: customer.id
 						   })
-	}).then(charge => {console.log("Credit card charged successfuly");
+	}).then((err,charge) => {
+    if (err && err.type === 'StripeCardError') {
+            console.log(JSON.stringify(err, null, 2));
+            res.status(500).send('There is some problem, pls cotact helpdesk');
+
+        }
+    else{
+            console.log("Credit card charged successfuly");
+            res.status(200).send('OK')
+
+        }
+
+  });
+
+  /*then(charge => {console.log("Credit card charged successfuly");
 					   res.status(200).send('OK')
-					  });
+           });*/
 }
 )
 

@@ -18,13 +18,26 @@ import {deepOrange900, cyan700, grey300,grey50,
         grey600,blue500, pink500} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import {List, ListItem} from 'material-ui/List';
 
 const styles =	
   {
 	root: 	  {						
 				display: 'flex',
 				flexWrap: 'wrap',						
+				width: '100%'
 			  },  
+	grid: 	  {						
+				display: 'flex',
+				flexWrap: 'wrap',						
+				width: '70%'
+	          },
+	cart: 	  {						
+				//display: 'flex',
+				//flexWrap: 'wrap',						
+				width: '20%'
+			  },
+	
 	gridList: {
 				width: '100%',
 				//height: 550,
@@ -92,21 +105,42 @@ const tilesData = [
   },
   
 ];
-var fromRuppeToCent = amount => (amount) * 100;							
-const localCurrency = 'USD'
+							
 export class GridListExampleSimple extends React.Component
 {
-	constructor() {
-		super()
-		//Init an empty state
-		//articles -> has a list of all articles
-		//currentArticle -> the current article being shown in detail
-		this.state = {
-		  products: [],
-		  selectedPrice: 0,
-		  isLoading: false
-		};
-	}
+	constructor() 
+		{
+			super()
+			//Init an empty state
+			//articles -> has a list of all articles
+			//currentArticle -> the current article being shown in detail
+			this.state = {
+			  products: [],			
+			  cart: [],
+			  data:'',
+			  selectedPrice: 0,
+			  isLoading: false
+			};
+			this.updateCart = this.updateCart.bind(this);
+			this.displayTitle = this.displayTitle.bind(this);
+		//	var cart = [];
+		}
+	
+	//var i = 0;
+	displayTitle(entered) 
+		{
+			//	ReactDOM.findDOMNode(this.refs.myInput).focus();
+			console.log('Buy Button clicked', entered);
+			//this.state.cart.push(title);
+			this.setState({data:entered.target.value});
+			//console.log('cart title', this.state.cart[0]);
+		}
+		
+	updateCart(productName) 
+		{
+			//cart.push(productName);
+			//this.setState({cart.push:entered.target.value});
+		}
   
 	componentDidMount() {
 		//Fetch the list of articles from the DB using the Hasura data apis
@@ -123,12 +157,8 @@ export class GridListExampleSimple extends React.Component
 		});
 	}
 					//'https://api.beseeching73.hasura-app.io/charge'
-	onToken = (amount,description) => token => {
-		
-		token.amount = fromRuppeToCent(amount);
-		token.currency = localCurrency;
-		token.description = description;
-		
+	onToken = (token) => {
+		//token.amount=this.state.selectedPrice;
 		fetch('http://localhost:8080/charge', {
 			  method: 'POST',
 			  body: JSON.stringify(token),			  
@@ -143,11 +173,12 @@ export class GridListExampleSimple extends React.Component
 			
 	render() 
 	{return(
-		<div style={styles.root}>				
+	  <div style={styles.root}>
+		<div style={styles.grid}>				
 			<GridList
 			  cellHeight={300}
 			  style={styles.gridList}
-			  cols = {3}
+			  cols = {2}
 			>
 				<Subheader style={styles.subhead}>Items on Sale </Subheader>
 				{this.state.products.map((product,i) => (					
@@ -156,22 +187,41 @@ export class GridListExampleSimple extends React.Component
 					  title={product.name}
 					  padding={0}
 					  subtitle={<span> <b>{product.price}</b></span>}
-					  actionIcon={<StripeCheckout
-									token={this.onToken (product.price, product.name)}
-									amount={1200}
-									currency="GBP"
-									stripeKey="pk_test_XNB5Gkou7mwEa8K9c9c2XFYL" 
-								//	metadata: {'order_id': '6735'}
-									
-								  />    
+					  actionIcon={<button  class='pay-deposit'
+										   onClick={this.displayTitle} 
+										   ref="myInput"
+										   value={this.state.data}
+								  > Add to Cart
+								  </button>  
 								 }
 					>
 						<img src={'images/' + product.imagename}  />
 					</GridTile>
 				))}
 			</GridList>	
-			<button class='pay-deposit' data-booking-id='3455'>Pay Deposit</button>			
-		</div>); 
+		</div>
+		<div style={styles.cart}> 
+			<h3> Shopping Cart </h3>
+			<button> {this.state.data} </button>								  
+			<List>
+			  <ListItem> {this.state.data} </ListItem>
+			  <ListItem primaryText="Sent mail"/>
+			  <ListItem primaryText="Sent mail"/>
+			  <ListItem primaryText="Drafts" />
+			  <ListItem primaryText="Inbox" />
+			  
+			  <StripeCheckout
+									token={this.onToken}
+									amount={1200}
+									currency="GBP"
+									stripeKey="pk_test_XNB5Gkou7mwEa8K9c9c2XFYL" 
+									metadata = {{order : "132"}}
+									
+								  />   
+			</List>
+		</div>  
+					
+	</div>); 
 	} 	
 }
 
