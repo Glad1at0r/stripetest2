@@ -20,10 +20,14 @@ Author        	: Team 52
 Base release  	: 28th Jan 2018.
 
 Generic note	:	Frontend - http://localhost:3000/home 
-					Backend - http://localhost:8080/charge
+					Backend - http://localhost:8080/charge (used by post method from frontend so don't try to use backend separately)
 
-
-How to Execute:
+Important Notes before usage: 
+1. This is a demo version only and not a full stripe implementation. 
+2. There are few other components in this repo for future purpose and Hasura hub deployment later, please ignore them. 
+3. Due to resource availability, only web version is designed and nopt react native one, which will be added later.
+					
+how to execute:
 1.	Install Node software (in windows/linux/any operating system supporting node). Refer to https://nodejs.org  
 2.	Open nodejs command prompt 
 3.	Create a folder for your project and execute command git init in that folder (assuming git is installed).
@@ -32,6 +36,14 @@ How to Execute:
 	a. Go to folder hello-react\microservices\api\src and do npm install and then npm start.
 	b. Go to folder hello-react\microservices\ui\app and do npm install and then npm start
 6. Now backend server runs in http://localhost:8080 and frontend runs in http://localhost:3000/home
-7.  You are ready now to chose product and place order. When prompted for card detail, pls use test card# 4242 4242 4242 4242 with any end date in future and CVC. We don't recommend to click remember me in the payment form.
+7.  You are ready now to go to http://localhost:3000/home to chose product and place order (we got only sample products for this demo). When prompted for card detail, pls use test card# 4242 4242 4242 4242 with any end date in future and CVC. We don't recommend to click remember me in the payment form.
 8.  Backend Server does log some messages.
 
+Support:
+Please contact mr.rajeshr@gmail.com or achuthan.unni@gmail.com for any support.
+
+Reference:
+	1. https://stripe.com/docs/charges 
+	2. https://stripe.com/docs/checkout/tutorial
+	3. NPM packages for stripe: stripe, react-stripe-checkout
+	
