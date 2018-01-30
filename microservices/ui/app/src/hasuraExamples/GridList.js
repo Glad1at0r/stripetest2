@@ -76,7 +76,7 @@ export class ProductGrid extends React.Component
 		token.currency = localCurrency;
 		token.description = description;
 		
-		fetch('http://localhost:8080/charge', {
+		fetch('https://api.beseeching73.hasura-app.io/charge', {
 			  method: 'POST',
 			  body: JSON.stringify(token),			  
 			  headers: {				
