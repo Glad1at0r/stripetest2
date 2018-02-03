@@ -23,7 +23,7 @@ items:
           imagePullPolicy: IfNotPresent
           name: ui
           env:
-          - name: STRIPE_PUBKEY
+          - name: REACT_APP_STRIPE_PKEY
             valueFrom:
               secretKeyRef:
                 name: hasura-secrets

@@ -6,7 +6,7 @@ var projectConfig = {
     filestore: "https://filestore." + process.env.REACT_APP_CLUSTER_NAME + ".hasura-app.io/v1/file"
   }
 }
-
+console.log(projectConfig.url);
 const saveOffline = (authToken) => {
   window.localStorage.setItem('authToken', authToken);
 }
