@@ -63,11 +63,7 @@ export class ProductGrid extends React.Component
 		//this.testCart = this.testCart.bind(this);
 	}
 	addToCart(itemName, amount){
-		console.log('hi addToCart: ', itemName);
-		//this.setState({cartProducts.push(name)});			
-		/*var newArray = this.state.cartProducts.slice();    
-		newArray.push(name);   
-		this.setState({cartProducts:newArray})*/
+		 
 		var newArray = this.state.cartProducts.slice();    
 		var tempCartTotal = this.state.cartTotal;
 		var itemFound = false;
@@ -93,8 +89,8 @@ export class ProductGrid extends React.Component
 	
 	componentDidMount() {
 		//Fetch the list of products from the Product DB using the Hasura data apis
-		console.log('stripe key is ====>',process.env.REACT_APP_STRIPE_PKEY)
-		console.log('stripe key is ====>',process.env.REACT_APP_CLUSTER_NAME)
+	//	console.log('stripe key is ====>',process.env.REACT_APP_STRIPE_PKEY)
+	//	console.log('stripe key is ====>',process.env.REACT_APP_CLUSTER_NAME)
 		this.setState({
 		  ...this.state,
 		  isLoading: true
@@ -117,7 +113,7 @@ export class ProductGrid extends React.Component
 		token.amount = fromRupeeToPaise(amount);
 		token.currency = localCurrency;		
 	//'https://api.beseeching73.hasura-app.io/charge'	
-		fetch('http://localhost:8080/charge', {
+		fetch('https://api.beseeching73.hasura-app.io/charge', {
 			  method: 'POST',
 			  body: JSON.stringify(token),			  
 			  headers: {				
@@ -148,7 +144,7 @@ export class ProductGrid extends React.Component
 			stripeButton = <StripeCheckout
 				token={this.onToken (this.state.cartTotal)}
 				currency="USD"
-				stripeKey={process.env.REACT_APP_STRIPE_PKEY}
+				stripeKey="pk_test_XNB5Gkou7mwEa8K9c9c2XFYL"
 			/>	
 			
 		}
