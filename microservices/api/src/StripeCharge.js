@@ -10,7 +10,7 @@ fetch.Promise = require('bluebird');
 var bodyParser = require('body-parser');
 
 //stripe module required
-var stripe = require("stripe")("sk_test_Gd7o2jvQ1Nnf77yfNCA3L1jE");
+var stripe = require("stripe")(process.env.STRIPE_PKEY);
 
 var config = require('./config');
 
