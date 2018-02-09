@@ -188,7 +188,7 @@ export class ProductGrid extends React.Component
 			stripeButton = <StripeCheckout
 				token={this.onToken (this.state.cartTotal)}
 				currency="USD"
-				stripeKey=process.env.REACT_APP_STRIPE_PKEY
+				stripeKey={process.env.REACT_APP_STRIPE_PKEY}
 			/>	
 			
 		}
