@@ -11,8 +11,10 @@ class ProductList extends React.Component {
   render() {
     return (
 		<MuiThemeProvider>
-			<GetToolbar />
-			<ProductGrid />
+			<div>
+				<GetToolbar />
+				<ProductGrid />
+			</div>
 		</MuiThemeProvider>
     );
   }

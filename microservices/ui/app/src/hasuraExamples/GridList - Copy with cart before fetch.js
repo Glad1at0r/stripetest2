@@ -1,8 +1,6 @@
-
 //This routine populates the /home with grid of products fetched from product table.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import fetch from 'isomorphic-fetch';
 
 //Use hasura data api to retrieve products list
 import {getArticleList} from './api';
@@ -48,7 +46,7 @@ const styles =
 var 	fromRupeeToPaise = amount => (amount) * 100;							
 //currency used is USD 
 const 	localCurrency = 'USD'
-const tilesData = [
+/*const tilesData = [
   {
     id: 1,
 	price: 10.00,
@@ -63,7 +61,7 @@ const tilesData = [
   },
   
   
-];
+];*/
 export class ProductGrid extends React.Component
 {
 	constructor() {
@@ -130,33 +128,8 @@ export class ProductGrid extends React.Component
 		
 		token.amount = fromRupeeToPaise(amount);
 		token.currency = localCurrency;		
-		
-		var requestOptions = {
-		  "method": "POST",
-		  "headers": {
-			  "Accept": "application/json",
-			  "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
-		  }
-		};
-		
-		requestOptions["body"] = JSON.stringify(token);
-		fetch('http://localhost:8080/charge', requestOptions)
-		  .then(function(response) {
-			var result = response.json();
-			//console.log('request success:',result);
-			var objtest = JSON.parse(result);
-			console.log('request objtest:',objtest);
-			alert('Your order is successfully placed. You will receive an email shortly. Please click Ok to go to home page');
-					this.setState({cartProducts:[]});
-					this.setState({cartTotal:0});		
-		  })
-		  .catch(function(error) {
-			console.log('Request Failed:' + error);
-		});
-		
-		
 	//'https://api.beseeching73.hasura-app.io/charge'	
-		/*fetch('http://localhost:8080/charge', {
+		fetch('http://localhost:8080/charge', {
 			  method: 'POST',
 			  body: JSON.stringify(token),			  
 			  headers: {				
@@ -174,7 +147,7 @@ export class ProductGrid extends React.Component
 			// handle network error here
 			console.log('Backend response: ',JSON.stringify(err))
 			alert('Some problem with server, try later or contact administrator')
-		   });	*/
+		   });	
 	}
 	
     

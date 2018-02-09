@@ -35,6 +35,7 @@ router.route("/").get(function (req, res) {
 router.use(bodyParser.text({ type: 'urlencoded' }))
 router.route("/charge").post(function (req, res)
 {
+//	res.setHeader( "Access-Control-Allow-Origin", req.headers.origin );
 	methodTime('/charge');
 //parse the body from frontend
   var obj = JSON.parse(req.body);
@@ -59,19 +60,23 @@ router.route("/charge").post(function (req, res)
                 description: obj.description,
 							  currency: obj.currency,
 							  customer: customer.id
-					  })).then((err,charge) => {
-              if (err && err.type === 'StripeCardError') {
+					  })).then((charge) => {						 
+						  console.log('main charge : ',JSON.stringify(charge))
+						  //console.log('res detail : ',JSON.stringify(res))
+						  res.status(200).send(JSON.stringify(charge))
+              /*if (err && err.type === 'StripeCardError') {
                       res.status(500).send('There is some problem, pls cotact helpdesk');
                   }
               else{
                       console.log("Credit card charged successfuly");
                       res.status(200).send('OK')
-                  }
+                  }*/
             })
-            .catch(res=>{console.log('rajesh catch',res)
-                      res.status(500).send('Error')
-                      return (res)
-                    });
+            .catch(err => {
+					console.log('rajesh catch status code : ',err.statusCode, err.type)
+					res.status(err.statusCode).send({'errorCode' : '400'})
+					//res.status(500).send('Error')					
+				 });
 }
 )
 //End of stripe charge
