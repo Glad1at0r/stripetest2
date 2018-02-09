@@ -176,7 +176,7 @@ export class ProductGrid extends React.Component
 			alert('Some problem with server, try later or contact administrator')
 		   });	*/
 	}
-	
+	//"pk_test_XNB5Gkou7mwEa8K9c9c2XFYL"
     
 	render() 
 	
@@ -188,7 +188,7 @@ export class ProductGrid extends React.Component
 			stripeButton = <StripeCheckout
 				token={this.onToken (this.state.cartTotal)}
 				currency="USD"
-				stripeKey="pk_test_XNB5Gkou7mwEa8K9c9c2XFYL"
+				stripeKey=process.env.REACT_APP_STRIPE_PKEY
 			/>	
 			
 		}
