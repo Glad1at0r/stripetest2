@@ -63,7 +63,7 @@ router.route("/charge").post(function (req, res)
 					  })).then((charge) => {						 
 						  console.log('main charge : ',JSON.stringify(charge))
 						  //console.log('res detail : ',JSON.stringify(res))
-						  res.status(200).send(JSON.stringify(charge))
+						  res.status(200).send({message: charge.status})
               /*if (err && err.type === 'StripeCardError') {
                       res.status(500).send('There is some problem, pls cotact helpdesk');
                   }
@@ -73,8 +73,9 @@ router.route("/charge").post(function (req, res)
                   }*/
             })
             .catch(err => {
-					console.log('rajesh catch status code : ',err.statusCode, err.type)
-					res.status(err.statusCode).send({'errorCode' : '400'})
+					console.log('catch status code : ',err.statusCode, err.type, err.message)
+					//console.log('fulle error body is: ',err);
+					res.status(err.statusCode).send({message : err.message, param: err.param})
 					//res.status(500).send('Error')					
 				 });
 }

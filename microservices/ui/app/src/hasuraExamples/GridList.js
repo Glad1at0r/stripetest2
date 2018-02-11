@@ -125,6 +125,7 @@ export class ProductGrid extends React.Component
 //Tokenize the params to pass to backend to create charge and post to backend route
 //Using localhost for local testing. Once code is checked in hasura cli, we can //remove this use the URL for api with route/charge which is 
 //'https://api.beseeching73.hasura-app.io/charge'
+//"pk_test_XNB5Gkou7mwEa8K9c9c2XFYL"
 
 	onToken = (amount) => token => {
 		
@@ -140,43 +141,27 @@ export class ProductGrid extends React.Component
 		};
 		
 		requestOptions["body"] = JSON.stringify(token);
-		fetch('http://localhost:8080/charge', requestOptions)
-		  .then(function(response) {
-			var result = response.json();
-			//console.log('request success:',result);
-			var objtest = JSON.parse(result);
-			console.log('request objtest:',objtest);
-			alert('Your order is successfully placed. You will receive an email shortly. Please click Ok to go to home page');
-					this.setState({cartProducts:[]});
-					this.setState({cartTotal:0});		
-		  })
-		  .catch(function(error) {
-			console.log('Request Failed:' + error);
-		});
-		
-		
-	//'https://api.beseeching73.hasura-app.io/charge'	
-		/*fetch('http://localhost:8080/charge', {
-			  method: 'POST',
-			  body: JSON.stringify(token),			  
-			  headers: {				
-				'Accept': 'application/json',
-				'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-			  },
-			  mode: 'no-cors'
-		}).then((res) => { 					
-					console.log('res from backend : ',JSON.stringify(res));
-					alert('Your order is successfully placed. You will receive an email shortly. Please click Ok to go to home page');
-					this.setState({cartProducts:[]});
-					this.setState({cartTotal:0});					
-			})
-		  .catch(function(err) {
-			// handle network error here
-			console.log('Backend response: ',JSON.stringify(err))
-			alert('Some problem with server, try later or contact administrator')
-		   });	*/
+		fetch('https://api.beseeching73.hasura-app.io/charge', requestOptions)
+		.then(r =>  r.json().then(data => ({status: r.status, body: data})))
+		.then(obj =>{
+					  console.log('MESSAGE : ',obj.status, obj.body.message)
+					  if (obj.status == 200)
+					  {
+						alert('Your order is successfully placed. You will receive an email shortly. Please click Ok to go to home page');  
+						this.setState({cartProducts:[]});
+						this.setState({cartTotal:0});		
+					  }
+					  else {
+						  alert('Error from payment : ' + obj.body.param + ' : ' +obj.body.message);  
+					  }
+					  
+					}
+			 )
+		.catch( function(error) {
+			alert('Some problem with server, try later or contact administrator');
+			console.log('There is problem with server, pls try later')});	
 	}
-	//"pk_test_XNB5Gkou7mwEa8K9c9c2XFYL"
+	
     
 	render() 
 	
