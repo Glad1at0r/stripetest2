@@ -27,9 +27,10 @@ const muiTheme = getMuiTheme({
 
     toolbar: {
             backgroundColor: grey100,
-            margin: 100,
-            height: 50,
-            padding:'100px 100px 100px 100px',
+		//	width : '100%',
+        //    margin: 0,
+            height: 70,
+        //    padding:'100px 100px 100px 100px',
     },
     flatButton : {
           primaryTextColor: grey600,

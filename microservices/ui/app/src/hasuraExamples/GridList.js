@@ -20,7 +20,9 @@ const styles =
   {
 	root: 	  {						
 				display: 'flex',
-				flexWrap: 'wrap',		
+				flexWrap: 'wrap',	
+				marginTop: 2,
+				marginLeft:2,
 				//width: '70%'
 			  },  
 	grid: 	  {						
