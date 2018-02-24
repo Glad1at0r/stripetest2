@@ -55,13 +55,13 @@ const tilesData = [
     id: 1,
 	price: 10.00,
     name: 'Blue Formal Shirt',
-    imagename: '1.jpg',
+    imagename: '1',
   },
   {
 	id: 2,
 	price: 50.00,
     name: 'Winter Jacket',
-    imagename: '2.jpg',
+    imagename: '2',
   },
   
   
@@ -114,14 +114,14 @@ export class ProductGrid extends React.Component
 		  ...this.state,
 		  isLoading: true
 		})
-	//Update the state with the fetched products
-	/*	getArticleList().then(productList => {	
+		getArticleList().then(productList => {
+		  //Update the state with the fetched products
 		  this.setState((prevState) => ({
 			isLoading: false,
 			products: productList
 		  }));
-		});*/
-		this.setState({products : tilesData})
+		});
+		//this.setState({products : tilesData})
 	}
 	
 //Tokenize the params to pass to backend to create charge and post to backend route
@@ -136,21 +136,14 @@ export class ProductGrid extends React.Component
 		
 		var requestOptions = {
 		  "method": "POST",
-		 // "headers": {
-			//  "Accept": "application/json",
-			  //"Content-Type": "application/json"
-			  //"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
-		//  }
+		  "headers": {
+			  "Accept": "application/json",
+			  "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+		  }
 		};
 		
-		const toktest ={
-			amount : 1000,
-			description : "test product",
-			id : token.id 
-		}
-		requestOptions["body"] = JSON.stringify(toktest);
-		//requestOptions["body"] = JSON.stringify(token);
-		fetch('http://localhost:5000/pay', requestOptions)
+		requestOptions["body"] = JSON.stringify(token);
+		fetch('https://api.beseeching73.hasura-app.io/charge', requestOptions)
 		.then(r =>  r.json().then(data => ({status: r.status, body: data})))
 		.then(obj =>{
 					  console.log('MESSAGE : ',obj.status, obj.body.message)
@@ -196,7 +189,6 @@ export class ProductGrid extends React.Component
 			>
 				<Subheader style={styles.subhead}>Items on Sale </Subheader>
 				{this.state.products.map((product,i) => (					
-					<a href="#">
 					<GridTile
 					  key={i}
 					  title={product.name}
@@ -204,11 +196,8 @@ export class ProductGrid extends React.Component
 					  subtitle={<span> <b>{product.price}</b></span>}
 					  actionIcon={<button onClick={() => this.addToCart(product.name,product.price)}> Add to Cart </button>}
 					>
-						
-							<img src={'images/' + product.imagename}  />
-											
+						<img src={'images/' + product.imagename}  />						
 					</GridTile>
-					</a>	
 				))}
 			</GridList>							
 		  </div>   		  

@@ -41,13 +41,6 @@ router.route("/charge").post(function (req, res)
   var obj = JSON.parse(req.body);
 
 //below code is to log the key elements of the body passed	for test purpose
-/*
-	console.log('OBJ.id : ',obj.id);
-	console.log('OBJ.email: ',obj.email);
-	console.log('OBJ.amount: ',obj.amount);
-  console.log('OBJ.currency: ',obj.currency);
-  console.log('OBJ.description: ',obj.description);
-*/
 
 //create customer
 	stripe.customers.create({
@@ -64,19 +57,12 @@ router.route("/charge").post(function (req, res)
 						  console.log('main charge : ',JSON.stringify(charge))
 						  //console.log('res detail : ',JSON.stringify(res))
 						  res.status(200).send({message: charge.status})
-              /*if (err && err.type === 'StripeCardError') {
-                      res.status(500).send('There is some problem, pls cotact helpdesk');
-                  }
-              else{
-                      console.log("Credit card charged successfuly");
-                      res.status(200).send('OK')
-                  }*/
+              
             })
             .catch(err => {
 					console.log('catch status code : ',err.statusCode, err.type, err.message)
 					//console.log('fulle error body is: ',err);
-					res.status(err.statusCode).send({message : err.message, param: err.param})
-					//res.status(500).send('Error')					
+					res.status(err.statusCode).send({message : err.message, param: err.param})					
 				 });
 }
 )
