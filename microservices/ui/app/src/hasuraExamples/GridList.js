@@ -136,11 +136,11 @@ export class ProductGrid extends React.Component
 		
 		var requestOptions = {
 		  "method": "POST",
-		 // "headers": {
-			//  "Accept": "application/json",
+		  "headers": {
+			  "Accept": "application/json",
 			  //"Content-Type": "application/json"
-			  //"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
-		//  }
+			  "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+		  }
 		};
 		
 		const toktest ={
